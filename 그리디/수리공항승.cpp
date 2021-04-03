@@ -25,6 +25,8 @@ int main() {
         int jump = 0;
         while(loc[idx+jump+1]-loc[idx] <= L-1){
             jump++;
+            if(idx+jump==loc.size()-1)
+                break;
         }
         idx += jump;
         answer+=1;
