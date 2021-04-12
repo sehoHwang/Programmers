@@ -54,3 +54,52 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
     return answer;
 }
 
+/** 솔루션 **/
+
+/*
+    위와 동일
+*/
+
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+int solution(int bridge_length, int weight, vector<int> truck_weights) {
+    int answer = 1;
+    int total = 0;
+    int i = 0;
+    queue<int> q;
+    total = truck_weights[i]; 
+    q.push(truck_weights[i]);
+    i=1;
+    while(!q.empty()){
+        
+        if(i == truck_weights.size()){
+            break;
+        }
+        
+        int tmp = truck_weights[i];
+
+        if(q.size() == bridge_length){
+            total -= q.front();
+            q.pop();
+        }
+        if(total + tmp <= weight){
+            i++;
+            q.push(tmp);
+            total += tmp;
+            answer++;
+        }
+        else{
+            q.push(0);
+            answer++;
+        }
+
+    }
+    answer+=bridge_length;
+    return answer;
+}
