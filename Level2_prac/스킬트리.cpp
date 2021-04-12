@@ -58,3 +58,48 @@ int solution(string skill, vector<string> skill_trees) {
     
     return answer;
 }
+
+/** 솔루션 **/
+
+/*
+    1. 각 문자열에 대한 1차 for 문
+
+    2. 각 문자열을 이루는 문자에 대해 2차 for 문을 돌리는데, skill에 포함돼있는지 find 함수를 통해 찾는다.
+    
+    3. idx 변수를 선언해 발견할 시 증가
+
+    4. 만약 idx와 find의 return 인덱스가 다를 경우 flag 변수 = 1
+
+    5. flag == 0 이면 answer 추가
+*/
+
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+int solution(string skill, vector<string> skill_trees) {
+    int answer = 0;
+    int len = skill.length();
+    for(auto i : skill_trees){
+        int idx = 0;
+        int flag = 0;
+        for(int j=0; j<i.length(); j++){
+            auto it = skill.find(i[j]);
+            if(it>=0 && it <=skill.length()-1){
+                if(idx == it){
+                    idx++;
+                }
+                else{
+                    flag = 1;
+                }
+            }
+        }
+        if(flag == 0)
+            answer++;
+    }
+    
+    return answer;
+}
