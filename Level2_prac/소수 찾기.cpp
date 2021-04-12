@@ -77,3 +77,79 @@ int solution(string numbers) {
     return answer;
 }
 
+
+/** 솔루션 **/
+
+/*
+    
+    1. 처음 이 문제를 해결할때는 tmp 문자열을 전역 변수로 두고 pop_back()을 하면서 문제를 풀었다면
+
+    2. 이번에는 전역 변수 없이 string 변수를 값 복사를 하면서 해결하였다.
+    
+*/
+
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+int len;
+vector<int> v;
+bool visit[7];
+
+bool isPrime(int x){
+    if(x==0 || x==1)
+        return false;
+    else if(x==2 || x==3)
+        return true;
+    
+    for(int i=2; i<=sqrt(x); i++){
+        if(x%i==0){
+            return false;
+        }
+    }
+    return true;
+    
+}
+
+void dfs(string s, int total, string numbers){
+    
+    int num = stoi(s);
+    if(isPrime(num)){
+        v.push_back(num);
+    }
+    
+    if(total == len)
+        return;
+    
+    
+    for(int i=0; i<len; i++){
+       if(!visit[i]){
+           string tmp = s + numbers.substr(i,1);
+           visit[i] = true;
+           dfs(tmp, total+1, numbers);
+           visit[i] = false;
+       }
+    }
+}
+
+int solution(string numbers) {
+    int answer = 0;
+    len = numbers.length();
+    
+    for(int i=0; i<len; i++){
+        string tmp = numbers.substr(i,1);
+        visit[i] = true;
+        dfs(tmp, 1, numbers);
+        visit[i] = false;
+    }
+
+    sort(v.begin(), v.end());
+    v.erase(unique(v.begin(), v.end()), v.end());
+    
+    answer = v.size();
+    return answer;
+}
