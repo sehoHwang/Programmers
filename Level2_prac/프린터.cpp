@@ -55,3 +55,58 @@ int solution(vector<int> priorities, int location) {
     }
     
 }
+
+
+/** 솔루션 **/
+
+/*
+    1. 다시 풀었을 땐, 큐가 아닌 vector pair를 이용해서 풀었다.
+
+    2. 우선순위큐는 기본 compare 값이 최대힙이다.
+*/
+
+#include <string>
+#include <vector>
+#include <queue>
+#include <iostream>
+
+using namespace std;
+
+vector<pair<int, int>> v;
+
+struct compare{
+    bool operator()(int a, int b){
+        return a<b;
+    }
+};
+
+int solution(vector<int> priorities, int location) {
+    int answer = 0;
+    priority_queue<int,vector<int>, compare> pq;
+    
+    for(int i=0; i<priorities.size(); i++){
+        v.push_back(make_pair(priorities[i], i));
+        pq.push(priorities[i]);
+    }
+    
+    while(!pq.empty()){
+        int tmp_f = v.front().first;
+        int tmp_s = v.front().second;
+        int top = pq.top();
+
+        if(tmp_f < top){
+            v.erase(v.begin());
+            v.push_back(make_pair(tmp_f, tmp_s));
+        }
+        else{
+            answer++;
+            if(tmp_s == location)
+                return answer;
+            v.erase(v.begin());
+            pq.pop();
+            
+        }
+    }
+    
+    return answer;
+}
