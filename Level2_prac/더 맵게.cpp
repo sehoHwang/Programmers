@@ -75,3 +75,59 @@ int solution(vector<int> scoville, int K) {
             return -1;
     }
 }
+
+/** 솔루션 **/
+
+/*
+    풀이가 동일했다.
+*/
+
+#include <string>
+#include <vector>
+#include <queue>
+#include <iostream>
+
+using namespace std;
+
+struct compare{
+    bool operator()(int a, int b){
+        return a>b;
+    }
+};
+
+int solution(vector<int> scoville, int K) {
+    int answer = 0;
+    
+    priority_queue<int, vector<int> ,compare> pq;    
+    
+    for(auto i : scoville){
+        pq.push(i);
+    }
+    
+    int min = pq.top();
+    if(min >= K)
+        return 0;
+    
+    while(!pq.empty()){
+        
+        int first = pq.top();
+        if(pq.size()==1){
+            if(first>=K){
+                return answer;
+            }   
+            else
+                return -1;
+        }
+        pq.pop();
+        int second = pq.top();
+        pq.pop();
+        
+        if(first >=K)
+            return answer;
+        
+        pq.push(first + second*2);
+        answer++;
+    }
+    
+    return answer;
+}
