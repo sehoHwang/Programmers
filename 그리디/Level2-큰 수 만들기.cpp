@@ -46,3 +46,4 @@ string solution(string number, int k) {
     answer = number;
 	return answer;
 }
+
