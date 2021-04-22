@@ -1,22 +1,28 @@
 #include <iostream>
-#include <map>
+#include <algorithm>
+#include <cstring>
 
 using namespace std;
 
-int main(){
-    multimap <int, int> m;
+int arr[100001];
+int dp[100001];
+int n;
 
-    m.insert(make_pair(1,10));
-    m.insert(make_pair(1,15));
-    m.insert(make_pair(5,15));
-    m.insert(make_pair(5,11));
-    m.insert(make_pair(5,12));
-    m.insert(make_pair(4,10));
-    m.insert(make_pair(2,10));
+
+int main(){
     
-    for(auto &it : m){
-        cout<<it.second;
+    scanf("%d",&n);
+    for(int i=1; i<=n; i++){
+        scanf("%d", &arr[i]);
+    }
+    int result = arr[1], answer = arr[1];
+    dp[1] = arr[1];
+    for(int i=2; i<=n; i++){
+        result += arr[i];
+        dp[i] = max(arr[i], dp[i-1]+arr[i]);
+        answer = max(answer, dp[i]);
     }
 
+    cout<<answer;
     return 0;
 }
