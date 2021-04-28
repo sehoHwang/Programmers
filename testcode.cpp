@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstring>
+#include <unordered_map>
 
 using namespace std;
 
@@ -11,18 +12,11 @@ int n;
 
 int main(){
     
-    scanf("%d",&n);
-    for(int i=1; i<=n; i++){
-        scanf("%d", &arr[i]);
-    }
-    int result = arr[1], answer = arr[1];
-    dp[1] = arr[1];
-    for(int i=2; i<=n; i++){
-        result += arr[i];
-        dp[i] = max(arr[i], dp[i-1]+arr[i]);
-        answer = max(answer, dp[i]);
-    }
-
-    cout<<answer;
+    unordered_map<string,int> m;
+    m.insert(make_pair("naver", 1));
+    m.insert(make_pair("coupang", 2));
+    m.insert(make_pair("webtoon", 3));
+    for(auto it : m)
+        cout<<it.first<<endl;
     return 0;
 }

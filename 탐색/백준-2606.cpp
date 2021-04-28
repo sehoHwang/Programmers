@@ -10,7 +10,7 @@ bool visit[101];
 int total = 0;
 void dfs(int y){
     if(!visit[y]){
-        cout<<"첫 방문 : "<<y<<endl;
+        
         visit[y] = true;
         total++;
         for(int i=1; i<=n; i++){
