@@ -9,14 +9,16 @@ int arr[100001];
 int dp[100001];
 int n;
 
-
+int test[20][20];
 int main(){
+
+    fill(&test[0][0], &test[20][20], 25*25*500);
     
-    unordered_map<string,int> m;
-    m.insert(make_pair("naver", 1));
-    m.insert(make_pair("coupang", 2));
-    m.insert(make_pair("webtoon", 3));
-    for(auto it : m)
-        cout<<it.first<<endl;
+    for(int i=0; i<20; i++){
+        for(int j=0; j<20; j++){
+            cout<<test[i][j]<<" ";
+        }
+        printf("\n");
+    }
     return 0;
 }
