@@ -59,3 +59,47 @@ vector<int> solution(string s) {
     
     return answer;
 }
+
+
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool compare(pair<int,int> a, pair<int,int> b){
+    return a.second > b.second;
+}
+
+vector<int> solution(string s) {
+    vector<int> answer;
+    vector<int> num;
+    unordered_map<int, int> m;
+    for(int i=0; i<s.length(); i++){
+        if(s[i] == '{' || s[i] == '}'){
+            s.erase(s.begin()+i);
+        }
+    }
+    s.erase(s.begin());
+    s.erase(s.end()-1);
+    int idx=0;
+    for(int i=0; i<s.length(); i++){
+        if(s[i]==','){
+            string tmp = s.substr(idx, i-idx);
+            m[stoi(tmp)]++;
+            idx = i+1;
+        }
+    }
+    
+    m[stoi(s.substr(idx))]++;
+    
+    vector<pair<int,int>> v(m.begin(), m.end());
+    sort(v.begin(), v.end(), compare);
+    
+    for(auto i : v){
+        answer.push_back(i.first);
+    }
+    
+    return answer;
+}
