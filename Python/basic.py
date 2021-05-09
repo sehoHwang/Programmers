@@ -123,8 +123,85 @@ print(val_list)
 
 # 집합 자료형
 
-data = set([1,1,2,3,4,4,5])
+"""
+data = set([1,1,2,3,4,4,5]) # 초기화 방법 1
 print(data)
 
-data = {1,1,2,3,4,4,5}
+data = {1,1,2,3,4,4,5} # 초기화 방법 2
 print(data)
+
+data.add(10) # 새로운 원소 한개 추가
+data.update([10, 11]) # 새로운 원소 여러개 추가
+print(data)
+
+data.remove(3) # 특정 값 제거
+print(data)
+"""
+import sys
+# 입력
+
+"""
+a = list(map(int, input().split()))
+print(a)
+
+# 빠른 입력을 위한 sys 라이브러리 사용
+data = sys.stdin.readline().rstrip()
+print(data)
+"""
+
+# 출력
+
+"""
+a = 1
+b = 2
+print(a,b)
+print(7)
+
+print(f"정답은 {a}입니다.")
+"""
+
+# if 문에서 pass
+"""
+a= 30
+
+if a >= 50:
+    print("a>=50")
+elif a== 30:
+    pass
+else:
+    print("nothing")
+"""
+
+# for 문
+
+"""
+array = [9,8,7,6,5]
+array.sort()
+for x in array:
+    print(x)
+"""
+
+# global variable
+
+"""
+a = 10
+
+def func():
+    global a
+    a+=1
+    print(a)
+
+func()
+"""
+
+# 람다 표현식
+
+
+#a = [('홍길동', 50), ('이순신', 32), ('아무개', 74)]
+#print(sorted(a, key = lambda x:x[1]))
+
+list1 = [1,2,3,4,5]
+list2 = [6,7,8,9,10]
+
+result = map(lambda a,b : a+b, list1, list2)
+print(list(result))
