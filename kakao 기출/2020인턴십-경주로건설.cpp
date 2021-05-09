@@ -6,7 +6,7 @@
 #include <cstring>
 
 using namespace std;
-int cost[26][26];
+//int cost[26][26];
 vector<vector<int>> tmp_board;
 struct Car{
     int r, c, dir, cost;
@@ -19,7 +19,7 @@ int solution(vector<vector<int>> board) {
     int len = board.size();
     int answer = len*len*500;
     tmp_board = board;
-    fill(&cost[0][0], &cost[len][len], answer);
+    //fill(&cost[0][0], &cost[len][len], answer);
     queue<Car> q;
     q.push({0,0,5,0});
     board[0][0] = 1;
