@@ -68,5 +68,6 @@
         "hash_map": "cpp",
         "map": "cpp",
         "set": "cpp"
-    }
+    },
+    "python.pythonPath": "/opt/homebrew/opt/python@3.9/bin/python3.9"
 }
