@@ -1,3 +1,5 @@
+# dictionary 활용
+
 def solution(record):
     answer = []
     userid = []
