@@ -200,8 +200,19 @@ func()
 #a = [('홍길동', 50), ('이순신', 32), ('아무개', 74)]
 #print(sorted(a, key = lambda x:x[1]))
 
+"""
 list1 = [1,2,3,4,5]
 list2 = [6,7,8,9,10]    
 
 result = map(lambda a,b : a+b, list1, list2)
 print(list(result))
+"""
+
+from itertools import combinations
+
+orders = ["XYZ", "XWY", "WXA"]
+new_order = []
+for order in orders:
+    tmp = sorted(order)
+    new_order.append(tmp)
+print(new_order)

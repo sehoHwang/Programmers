@@ -10,22 +10,12 @@
 
 from itertools import combinations
 
-def sortAlpha(s):
-    tmp = []
-    for x in s:
-        tmp.append(x)
-    tmp.sort()
-    string = ""
-    for x in tmp:
-        string += x
-    return string
-
 def solution(orders, course):
     answer = []
     dic = {}
     new_orders = []
     for x in orders:
-        new_orders.append(sortAlpha(x))
+        new_orders.append(sorted(x))
     
     
     for x in course:
