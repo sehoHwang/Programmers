@@ -36,3 +36,27 @@ def solution(s):
         answer.append(int(x[0]))
     
     return answer
+
+
+
+"""
+    New solution
+
+    1. 리스트의 not in 과 list.sort(key = len)을 사용한 솔루션
+"""
+
+def solution(s):
+    answer = []
+    new_s = []
+    s = s[2:-2]
+    
+    new_s = s.split('},{')
+    new_s.sort(key = len)
+    
+    for x in new_s:
+        tmp = x.split(',')
+        for i in tmp:
+            if int(i) not in answer:
+                answer.append(int(i))
+    
+    return answer
