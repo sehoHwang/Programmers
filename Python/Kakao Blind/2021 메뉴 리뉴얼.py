@@ -1,7 +1,7 @@
 """
     Solution
 
-    1. orders의 각 원소를 오름차순으로 정렬한다. (sortAlpha 함수 구현) -> new_orders 리스트 새로 정의한 후 삽입
+    1. orders의 각 원소를 오름차순으로 정렬한다. sorted() 함수 사용
 
     2. course에 있는 개수 별로 조합을 구해 dictionary 자료구조에 삽입한다 (key : 메뉴, value : 나타난 갯수)
 
