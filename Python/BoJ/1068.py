@@ -1,3 +1,5 @@
+# 주의! -> root가 0이 아닐 수도 있음
+# -1이 처음으로 나타나는 인덱스를 기준으로 bfs시 성공
 from collections import defaultdict, deque
 
 N = int(input())
