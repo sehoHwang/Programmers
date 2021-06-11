@@ -20,5 +20,9 @@ int main(){
     }
     //sort(tmp.begin(), tmp.end());
     cout<<tmp.size();
+    cout<<tmp[0]<<endl;
+    cout<<tmp[4997]<<endl;
+    cout<<tmp[4998]<<endl;
+    cout<<tmp[4999]<<endl;
     return 0;
 }
