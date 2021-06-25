@@ -5,13 +5,13 @@ for _ in range(T):
     n = int(input()) # 배열의 개수
     arr_input = input()
     arr_input = arr_input.replace(']','').replace('[','')
-
+    l, r, d = 0, 0, True
     if function.count('D') > len(arr_input):
         print('error')
         continue
     l, r= 0,0
     if len(arr_input) != 0:
-        arr = list(map(int,arr_input.split(',')))
+        arr = list(arr_input.split(','))
     else:
         if 'D' in function:
             print('error')
@@ -19,12 +19,16 @@ for _ in range(T):
             print('[]')
         continue
     for p in function:
+        
         if p == 'R':
-            arr.reverse()
+            d = not d
         else:
-            if len(arr) == 0:
-                print('error')
-                break
-            del arr[0]
-    if len(arr) != 0:
-        print(arr)
+            if d: l+=1
+            else: r+=1
+
+    if l+r <= n:
+        res = arr[l:n-r]
+        if d: print('['+','.join(res)+']')
+        else: print('['+','.join(res[::-1])+']')
+    else:
+        print('error')
