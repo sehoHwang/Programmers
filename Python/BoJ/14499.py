@@ -35,4 +35,3 @@ for m in move:
     else:
         dice[5] = board[y][x]
         board[y][x] = 0
-    
