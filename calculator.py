@@ -1,55 +1,66 @@
-def pretreat(exp):
-    start = 0
-    for idx, e in enumerate(exp):
-        if e in operator:
-            operands.append(exp[start:idx])
-            start = idx+1
-            operators.append(e)
-    operands.append(exp[start:len(exp)])
+import re
+import sys
 
-def find_pos():
-    prior = 3
-    pos = 0
-    for idx, opt in enumerate(operators):
-        if operator[opt]<prior:
-            prior = operator[opt]
-            pos = idx
-    return pos
+def tokenize(expStr):
+    pat = re.compile(r'(?:(?<=[^\d\.])(?=\d)|(?=[^\d\.]))', re.MULTILINE)
+    return [x for x in re.sub(pat, ' ', expStr).split(' ') if x]
 
-def calculate(position):   
-    cur_opt = operators[position]
-    result = 0
-    if cur_opt =='*':
-        result = operands[position]*operands[position+1]
-    elif cur_opt =='/':
-        result = operands[position]//operands[position+1]
-    elif cur_opt =='+':
-        result = operands[position]+operands[position+1]
-    elif cur_opt =='-':
-        result = operands[position]-operands[position+1]
+def parse_expr(expStr):
+    tokens = tokenize(expStr)
+    op = dict(zip('*/+-()', (50, 50, 40, 40, 0, 0)))
+    output = []
+    stack = []
 
-    operands[position] = result
-    del operands[position+1]
-    del operators[position]
+    for item in tokens:
+        if item not in op:
+            output.append(item)
+        elif item == '(':
+                stack.append(item)
+        elif item == ')':
+            while stack != [] and \
+                        stack[–1] != '(':
+                output.append(stack.pop())
+            stack.pop()
+        else:
+            while stack != [] and \
+                    op[stack[–1]] >= op[item]:
+                output.append(stack.pop())
+            stack.append(item)
 
-input = input()
+    while stack:
+        output.append(stack.pop())
+    print(output)
+    return output
 
-operands = []
-operators = []
+def calc_expr(tokens):
+    operations = {
+            '*': lambda x, y: y * x,
+            '/': lambda x, y: y / x,
+            '+': lambda x, y: y + x,
+            '-': lambda x, y: y – x
+            }
 
-operator = dict()
-operator['('] = 0
-operator['*'] = 1
-operator['/'] = 1
-operator['+'] = 2
-operator['-'] = 2
-pretreat(input)
-operands = list(map(int, operands))
-#print(operands)
-#print(operators)
-while len(operands)!=1:
-    cur_pos = find_pos()
-    calculate(cur_pos)
-    print(operands)
+    stack = []
 
-print(operands[-1])
+    for item in tokens:
+        if item not in operations:
+            if '.' in item:
+                stack.append(float(item))
+            else:
+                stack.append(int(item))
+        else:
+            x = stack.pop()
+            y = stack.pop()
+            stack.append(operations[item](x, y))
+    return stack[–1]
+
+
+def process(expStr):
+    print(calc_expr(parse_expr(expStr)))
+
+
+if len(sys.argv) > 1:
+    x = ' '.join(sys.argv[1:])
+else:
+    x = input()
+process(x)
